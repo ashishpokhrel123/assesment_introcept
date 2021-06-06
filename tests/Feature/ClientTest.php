@@ -12,23 +12,23 @@ class ClientTest extends TestCase
 
     //testing for fetching data from csv file
 
-    public function testFetchDatafromCsv()
-    {
+    // public function testFetchDatafromCsv()
+    // {
 
-          $data = [
-            'name' => 'New Client',
-            'email' => 'client123@gmail.com',
-            'phone' => '9860409629',
-            'gender' => 'male',
-            'dob' => '1997-09-27',
-            'nationality' => 'clientcountry',
-            'education' => 'client',
-        ];
-        $response = $this->json('POST', route('create'), $data);
-        $response = $this->json('GET', route('getclient'));
-        $response->assertStatus(200);
+    //       $data = [
+    //         'name' => 'New Client',
+    //         'email' => 'client123@gmail.com',
+    //         'phone' => '9860409629',
+    //         'gender' => 'male',
+    //         'dob' => '1997-09-27',
+    //         'nationality' => 'clientcountry',
+    //         'education' => 'client',
+    //     ];
+    //     $response = $this->json('POST', route('create'), $data);
+    //     $response = $this->json('GET', route('getclient'));
+    //     $response->assertStatus(200);
         
         
 
-    }
+    // }
 }
