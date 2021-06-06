@@ -14,7 +14,3 @@ before_script:
 
 script:
   - vendor/bin/phpunit
-
-install:
-  - ./bin/ci/install_dependencies.sh
-  - php vendor/vendors.php
