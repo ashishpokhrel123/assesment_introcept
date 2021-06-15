@@ -30,4 +30,11 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    /* adding loggly */
+
+    'loggly' => [
+         'key' => env('LOGGLY_KEY'),
+         'tag' => str_replace(' ', '_', env('APP_NAME') . '_' . env('APP_ENV')),
+    ]
+
 ];

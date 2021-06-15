@@ -2,7 +2,7 @@
   <div class="container">
         <h3 class="p-3 text-center">All client</h3>
         <button @click="goToHome()"> Create Client </button>
-        <table class="table table-striped table-bordered">
+        <table class="table table-striped table-bordered" id="my_table">
             <thead>
                 <tr>
                     <th>S.N</th>
@@ -29,15 +29,19 @@
                     <td><router-link :to="{name: 'clientdetail', params: { id: clients[0] }}" class="btn btn-primary">View Detail</router-link></td>
                    
                 </tr>
+                 <b-pagination
+            v-model="currentPage"
+            :total-rows="rows"
+             :per-page="perPage"
+             aria-controls="my_table"
+               align="center"
+          ></b-pagination>
             </tbody>
+           
         </table>
-        <b-pagination
-          v-model="currentPage"
-          :total-rows="rows"
-          :per-page="perPage"
-          aria-controls="itemList"
-          align="center"
-         ></b-pagination>
+         
+
+    <p class="mt-3">Current Page: {{ currentPage }}</p>
         
     </div>    
 
@@ -48,14 +52,15 @@
 import DateService from "../services/DataServices";
 export default {
     
-    name: "Client", 
+    name: "Client",
+     currentPage = 1,
+    perPage = 3,
     data() {
         
       return {
        
         client:[],
-        currentPage :1,
-        perPage : 3,
+        
         
         
         
@@ -73,6 +78,13 @@ export default {
         })
         
     },
+    rows = this.client.length,
+    get client() {
+       return this.client.slice(
+          (this.currentPage - 1) * this.perPage,
+            this.currentPage * this.perPage,
+    );
+  },
     methods:{
        goToHome(){
          this.$router.push('/'); 

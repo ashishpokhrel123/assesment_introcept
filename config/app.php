@@ -123,6 +123,9 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
+
+    
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
@@ -133,6 +136,9 @@ return [
     | this array to grant expanded functionality to your applications.
     |
     */
+
+    'log' => env('APP_LOG', 'custom'),
+
 
     'providers' => [
 
@@ -175,6 +181,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Understand\UnderstandLaravel5\UnderstandLaravel5ServiceProvider::class,
+
+        
 
     ],
 

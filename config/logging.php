@@ -17,7 +17,7 @@ return [
     |
     */
 
-    'default' => env('LOG_CHANNEL', 'stack'),
+     'default' => env('LOG_CHANNEL', 'stack'),
 
     /*
     |--------------------------------------------------------------------------
@@ -35,16 +35,20 @@ return [
     */
 
     'channels' => [
-        'stack' => [
-            'driver' => 'stack',
-            'channels' => ['single'],
-            'ignore_exceptions' => false,
-        ],
+    'stack' => [
+      'driver' => 'stack',
+      'channels' => ['single', 'papertrail'],
+      
+    ],
+
+    
 
         'single' => [
             'driver' => 'single',
             'path' => storage_path('logs/laravel.log'),
             'level' => env('LOG_LEVEL', 'debug'),
+            'bubble' => true,
+            'permission' => 0644
         ],
 
         'daily' => [
@@ -71,6 +75,17 @@ return [
                 'port' => env('PAPERTRAIL_PORT'),
             ],
         ],
+        
+            'logentries' => [
+            'driver'  => 'monolog',
+            'handler' => Monolog\Handler\SyslogUdpHandler::class,
+            'with' => [
+            'host' => 'my.logentries.internal.datahubhost.company.com',
+            'port' => '10000',
+    ],
+   ],
+           
+     
 
         'stderr' => [
             'driver' => 'monolog',

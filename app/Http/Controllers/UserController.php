@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -13,7 +14,8 @@ class UserController extends Controller
     /*  Store Client data to CSV file */
     public function addUser(Request $request)
     {
-        $request->validate([
+        try {
+            $request->validate([
             'name' => ['required','string'],
             'gender'=> ['required', 'string'],
             'email'=> ['required', 'email'],
@@ -48,9 +50,18 @@ class UserController extends Controller
          fputcsv($file_open, $form_data);
     
          fclose($file_open);
+         Log::info('client save to csv file');
         
             
          return response()->json($form_data,201);
+        } catch (Throwable $e) {
+            Log::error($e);
+        }   
+        
+
+
+
+          
 
 
         
@@ -61,14 +72,19 @@ class UserController extends Controller
      /* Fetching all Client from csv file */
     public function getClient(Request $request)
     {
-        $file = fopen('users.csv', 'r');
-        $all_userData =  new Collection();
-         while (($data = fgetcsv($file)) !== false){
-             $all_userData->push($data);
+        try {
+            $file = fopen('users.csv', 'r');
+            $all_userData =  new Collection();
+            while (($data = fgetcsv($file)) !== false){
+                $all_userData->push($data);
+                
+            }
+            return response()->json($all_userData,200);
+            Log::info('my message');
+        } catch (Throwable $e) {
+            Log::error($e);
         }
         
-
-         return response()->json($all_userData,200);
     }
 
     

@@ -52,12 +52,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Client",
@@ -65,7 +59,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       client: [],
       currentPage: 1,
-      perPage: 3
+      perPage: 3,
+      rows: 2
     };
   },
   mounted: function mounted() {
@@ -311,20 +306,9 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("b-pagination", {
-        attrs: {
-          "total-rows": _vm.rows,
-          "per-page": _vm.perPage,
-          "aria-controls": "itemList",
-          align: "center"
-        },
-        model: {
-          value: _vm.currentPage,
-          callback: function($$v) {
-            _vm.currentPage = $$v
-          },
-          expression: "currentPage"
-        }
+      _c("pagination", {
+        directives: [{ name: "ref", rawName: "v-ref:table", arg: "table" }],
+        attrs: { for: "table", "per-page": _vm.PerPage, records: _vm.Records }
       })
     ],
     1
